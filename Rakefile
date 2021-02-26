@@ -7,6 +7,14 @@ require "rake/extensiontask"
 
 task :build => :compile
 
+task :install => :build do
+  system "gem install " + Nmax::NAME + "-" + Nmax::VERSION + ".gem"
+end
+
+task :clean do
+  system "rm *.gem"
+end
+
 Rake::ExtensionTask.new("nmax") do |ext|
   ext.lib_dir = "lib/nmax"
 end
