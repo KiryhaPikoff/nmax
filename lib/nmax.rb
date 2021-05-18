@@ -29,18 +29,10 @@ module Nmax
       num = $stdin.readline.strip
       next if num.empty?
       passed_number_count += 1
-      slice_to = nmax_count - 1
-      if passed_number_count <= nmax_count
-        values.insert passed_number_count, num
-        slice_to = passed_number_count
-      else
-        comp_result = num <=> values.last
-        values.insert_bin num unless comp_result == -1
-      end
-      values = values[0..slice_to]
-
-      if passed_number_count == nmax_count
-        values = values.sort { |a, b| a <=> b }.reverse
+      comp_result = num <=> values.last
+      unless comp_result == -1
+        values.insert_bin num
+        values = values[0..passed_number_count]
       end
     end
 
